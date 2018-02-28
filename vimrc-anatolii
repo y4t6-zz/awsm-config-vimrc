@@ -1,0 +1,146 @@
+call plug#begin('~/.vim/plugged')
+
+" Color scheme
+Plug 'nanotech/jellybeans.vim'
+" Plug 'morhetz/gruvbox'
+" Plug 'w0ng/vim-hybrid'
+" Plug 'chriskempson/base16-vim'
+" Plug 'joshdick/onedark.vim'
+" Plug 'nlknguyen/papercolor-theme'
+
+" Airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" NERDTree
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+
+" CtrlP
+" Plug 'ctrlpvim/ctrlp.vim'
+
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" Editing
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-surround'
+Plug 'Raimondi/delimitMate'
+Plug 'dhruvasagar/vim-table-mode'
+" Plug 'easymotion/vim-easymotion'
+Plug 'shougo/vinarise'
+
+" Lang / (Multi)
+" Plug 'scrooloose/syntastic'
+" Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Valloric/YouCompleteMe'
+" Plug 'rdnetto/YCM-Generator'
+
+" Lang / C, C++, JavaScript
+Plug 'rhysd/vim-clang-format'
+
+" Lang / CSS
+" Plug 'ap/vim-css-color'
+
+" Lang / Rust
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
+
+" Lang / Lisp
+" Plug 'kien/rainbow_parentheses.vim'
+
+" Lang / SLIM
+" Plug 'slim-template/vim-slim'
+
+" Lang / TOML
+Plug 'cespare/vim-toml'
+
+call plug#end()
+
+" Vim
+set nocompatible
+set noswapfile
+
+set number
+set cursorline
+
+set mouse=a
+
+set tabstop=2
+set softtabstop=0
+set shiftwidth=2
+set expandtab
+set smarttab
+
+set foldmethod=syntax
+
+set wildmenu
+
+set splitbelow
+set splitright
+
+set scrolloff=3
+
+set listchars=tab:▸\ ,eol:¬
+
+nmap <C-D> :sh<CR>
+nmap ; A;<ESC>
+
+nnoremap <C-H> <C-W>h
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-L> <C-W>l
+
+" autocmd! BufWritePost .vimrc source ~/.vimrc
+
+" Plug
+let g:plug_threads = 2
+let g:plug_timeout = 30
+
+" Color scheme
+colorscheme jellybeans
+
+" Airline
+set laststatus=2
+set ttimeoutlen=50
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_right_alt_sep = ""
+let g:airline_right_sep = ""
+let g:airline_left_alt_sep = ""
+let g:airline_left_sep = ""
+
+" NERDTree
+nmap <Tab> :NERDTreeTabsToggle<CR>
+let NERDTreeIgnore = ['\.pyc$', '\.o$', '\.a$']
+
+" Editing
+nmap <C-C> gcc
+vmap <C-C> gc
+let delimitMate_expand_cr = 1
+
+" Lang / (Multi)
+let g:indent_guides_start_level = 1
+map <F2> :IndentGuidesToggle<CR>
+let g:clang_format#code_style = "chromium"
+let g:clang_format#auto_format = 0
+map <C-F> :ClangFormat<CR>
+vmap <C-F> :ClangFormat<CR>
+
+" Lang / C, C++, Python
+" let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+autocmd CompleteDone * pclose
+
+" Lang / Rust
+let g:rustfmt_autosave = 1
+let g:racer_experimental_completer = 1
+
+" Lang / SLIM
+autocmd BufNewFile,BufRead *.slim setlocal foldmethod=indent
+
+" UNIT norminette code style
+autocmd BufNewFile,BufRead */UNIT/* set noexpandtab
+autocmd BufNewFile,BufRead */UNIT/* set shiftwidth=4
+autocmd BufNewFile,BufRead */UNIT/* set tabstop=4
